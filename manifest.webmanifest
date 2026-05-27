@@ -1,0 +1,10 @@
+{
+  "name": "Aljezur 2026 — Plano",
+  "short_name": "Aljezur 2026",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6f7fb",
+  "theme_color": "#0ea5e9",
+  "description": "Plano Porto↔Aljezur (EV + família) com modo do dia e offline.",
+  "icons": []
+}

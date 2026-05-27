@@ -5,288 +5,281 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#0ea5e9" />
   <title>Aljezur 2026 — Plano (EV + Família)</title>
-  <meta name="description" content="Plano de viagem Porto↔Aljezur (27/06–03/07/2026) no XPeng G6 + roteiro leve + checklists + calculadoras EV." />
+  <meta name="description" content="Plano de viagem Porto↔Aljezur (27/06–03/07/2026) no XPeng G6 + plano do dia + checklists + calculadoras EV. Funciona offline." />
+  <link rel="manifest" href="manifest.webmanifest" />
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
   <header class="topbar" id="top">
     <div class="wrap topbar__inner">
-      <div class="brand">
+      <div class="brand" role="button" tabindex="0" data-tab="overview" aria-label="Ir para visão geral">
         <div class="brand__logo" aria-hidden="true">⚡</div>
         <div class="brand__text">
           <div class="brand__title">Aljezur 2026</div>
-          <div class="brand__subtitle">Plano rápido (EV + bebé + 4 anos)</div>
+          <div class="brand__subtitle">EV + bebé (3m) + 4 anos — 27/06→03/07</div>
         </div>
       </div>
 
-      <button class="iconbtn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false">☰</button>
-
-      <nav class="nav" id="nav">
-        <a href="#visao-geral">Visão geral</a>
-        <a href="#ida">Ida</a>
-        <a href="#volta">Volta</a>
-        <a href="#aljezur">Semana</a>
-        <a href="#ev">Ferramentas EV</a>
-        <a href="#checklists">Checklists</a>
-        <a href="#notas">Notas</a>
-      </nav>
+      <div class="topbar__actions">
+        <button class="iconbtn" id="themeBtn" aria-label="Alternar tema">🌗</button>
+        <button class="iconbtn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false">☰</button>
+      </div>
     </div>
+
+    <nav class="tabs wrap" id="tabs" aria-label="Navegação">
+      <button class="tab" data-tab="today">Plano do dia</button>
+      <button class="tab" data-tab="trip">Viagem</button>
+      <button class="tab" data-tab="map">Mapa (offline)</button>
+      <button class="tab" data-tab="home">Carregar em casa</button>
+      <button class="tab" data-tab="ev">EV</button>
+      <button class="tab" data-tab="checks">Checklists</button>
+      <button class="tab" data-tab="notes">Notas</button>
+      <button class="tab" data-tab="overview">Info</button>
+    </nav>
   </header>
 
   <main class="wrap">
 
-    <section class="hero" id="visao-geral">
-      <div class="hero__grid">
-        <div>
-          <h1>Porto ⇄ Aljezur (Vila da Telha) — 27/06 a 03/07/2026</h1>
-          <p class="lead">
-            Plano confortável para <strong>2 adultos</strong> + <strong>criança 4 anos</strong> + <strong>bebé 3 meses</strong>,
-            no <strong>XPeng G6 Standard MY24</strong>. Objetivo: chegar a carregadores com <strong>≥20%</strong> e ao destino com <strong>≥30%</strong>.
-          </p>
+    <div class="banner" id="offlineBanner" hidden>
+      <strong>Offline:</strong> o site funciona, mas links externos (Maps/sites) precisam de internet.
+    </div>
 
-          <div class="chips" role="list">
-            <span class="chip" role="listitem">🚼 Pausas ~4/4h (bebé)</span>
-            <span class="chip" role="listitem">🏁 Condução 120 km/h</span>
-            <span class="chip" role="listitem">🏖️ Praias cedo + piscina ao meio-dia</span>
-            <span class="chip" role="listitem">🧠 Paragem grande: Pavilhão do Conhecimento</span>
-          </div>
+    <!-- PANELS -->
 
-          <div class="ctaRow">
-            <button class="btn" id="copySummaryBtn">Copiar resumo</button>
-            <a class="btn btn--ghost" href="#ev">Ir para calculadoras</a>
-          </div>
-
-          <div class="callout">
-            <strong>Regra anti-stress:</strong> a última carga grande deve ser relativamente perto (A2) para garantires
-            <strong>≥30%</strong> ao chegar a Aljezur, mesmo com vento/AC.
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card__title">Atalhos rápidos</div>
-          <div class="card__body">
-            <div class="grid2">
-              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Pavilh%C3%A3o%20do%20Conhecimento%2C%20Lisboa">📍 Maps: Pavilhão</a>
-              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Centro%20Vasco%20da%20Gama%2C%20Lisboa">🔌 Maps: Vasco da Gama (AC)</a>
-              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=IONITY%20Leiria%20A1%20%C3%A1rea%20de%20servi%C3%A7o%20Cepsa">⚡ Maps: IONITY Leiria</a>
-              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=IONITY%20Almod%C3%B4var%20A2%20%C3%A1rea%20de%20servi%C3%A7o">⚡ Maps: IONITY Almodôvar</a>
-              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Mercado%20Municipal%20de%20Aljezur">🛒 Mercado Aljezur</a>
-              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=R%C3%AEbat%20da%20Arrifana%20Ponta%20da%20Atalaia">🏛️ Rîbat da Arrifana</a>
-            </div>
-            <p class="muted tiny">Dica: guarda isto no ecrã inicial do telemóvel (Share → Add to Home Screen).</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="ida">
-      <div class="section__head">
-        <h2>Ida — Sáb 27/06</h2>
-        <p class="muted">Estrutura: pausa curta + paragem grande (atividade) + top-up curto para chegar a Aljezur com ≥30%.</p>
-      </div>
-
-      <div class="cards">
-        <article class="card">
-          <div class="card__title">Paragem 1 — Leiria (HPC)</div>
-          <div class="card__body">
-            <ul class="list">
-              <li><strong>Objetivo:</strong> pausa bebé + WC + esticar pernas + 15–25 min de carga DC.</li>
-              <li><strong>Alvo (sugestão):</strong> chegar ≥20% e sair ~60–70% (depende do teu consumo).</li>
-              <li class="muted">Alternativas: qualquer DC 50–150 kW na mesma área / zonas próximas.</li>
-            </ul>
-            <div class="row">
-              <a class="btn btn--small" target="_blank" rel="noopener" href="https://chargemap.com/pt-pt/ionity-leiria-area-de-servico-cepsa-a1-leiria-s-n-pk-11.html">Abrir info (Chargemap)</a>
-              <a class="btn btn--small btn--ghost" target="_blank" rel="noopener" href="https://pt.moeveglobal.com/pt/perto-de-si/pontos-de-carregamento/leiria/leiria-a1-leiria-lislra">Abrir info (Moeve)</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card__title">Paragem 2 — Lisboa (Parque das Nações)</div>
-          <div class="card__body">
-            <ul class="list">
-              <li><strong>Atividade:</strong> <span class="tag">Pavilhão do Conhecimento</span> (indoor e interativo).</li>
-              <li><strong>Carga:</strong> <span class="tag">AC 22 kW</span> no <strong>Centro Vasco da Gama</strong> (piso -1, zona azul; 4 lugares).</li>
-              <li><strong>Combo ideal:</strong> visita 1h30–2h + almoço.</li>
-            </ul>
-            <details class="details">
-              <summary>Horários úteis</summary>
-              <div class="details__body">
-                <p class="muted">Pavilhão: tipicamente 10:00–18:00 (3ª–6ª) e 10:00–19:00 (fins de semana/feriados); última entrada 17:30/18:30.</p>
-                <p class="muted">Oceanário (se mudares de ideias): 10:00–20:00; última entrada 19:00.</p>
-              </div>
-            </details>
-            <div class="row">
-              <a class="btn btn--small" target="_blank" rel="noopener" href="https://www.pavconhecimento.pt/pt/visite-nos/bilheteira">Bilhetes/horários (Pavilhão)</a>
-              <a class="btn btn--small" target="_blank" rel="noopener" href="https://www.centrovascodagama.pt/servicos/carregamento-de-viaturas-eletricas/">Carregamento (Vasco da Gama)</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card__title">Paragem 3 — Almodôvar (HPC top-up)</div>
-          <div class="card__body">
-            <ul class="list">
-              <li><strong>Objetivo:</strong> top-up 10–20 min para chegares a Aljezur com <strong>≥30%</strong>.</li>
-              <li><strong>Porquê aqui:</strong> reduz o “último troço” e dá margem ao vento/AC.</li>
-            </ul>
-            <div class="row">
-              <a class="btn btn--small" target="_blank" rel="noopener" href="https://chargemap.com/pt-pt/ionity-25.html">Abrir info (Chargemap)</a>
-              <a class="btn btn--small btn--ghost" target="_blank" rel="noopener" href="https://pt.moeveglobal.com/pt/perto-de-si/pontos-de-carregamento/almodovar/al-poente">Abrir info (Moeve)</a>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <div class="callout callout--info">
-        <strong>Nota EV:</strong> em DC, o tempo mais eficiente costuma ser carregar até ~70–80% (curva de carga abranda acima disso).
-        Usa a calculadora em baixo para decidir o “target” certo.
-      </div>
-    </section>
-
-    <section class="section" id="volta">
-      <div class="section__head">
-        <h2>Volta — Sex 03/07</h2>
-        <p class="muted">Na véspera (02/07), aproveita a tomada 10A para subir o SOC para 90–100%.</p>
-      </div>
-
-      <div class="cards">
-        <article class="card">
-          <div class="card__title">Saída de Vila da Telha</div>
-          <div class="card__body">
-            <ul class="list">
-              <li>Objetivo: sair com <strong>≥90%</strong> (ideal), para reduzir dependência de postos no início.</li>
-              <li>Se o bebé estiver calmo, faz a 1ª pausa mais tarde; senão, pausa curta cedo (sem obrigação de carregar).</li>
-            </ul>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card__title">Paragens sugeridas (espelho da ida)</div>
-          <div class="card__body">
-            <ol class="list">
-              <li><strong>Almodôvar (HPC)</strong> — pausa/WC + top-up se precisares.</li>
-              <li><strong>Lisboa (Vasco da Gama)</strong> — almoço + AC 22 kW se for útil.</li>
-              <li><strong>Leiria (HPC)</strong> — último top-up para chegares ao Porto com ≥30%.</li>
-            </ol>
-            <div class="row">
-              <a class="btn btn--small" href="#ida">Ver detalhes das paragens</a>
-              <a class="btn btn--small btn--ghost" href="#ev">Calculadoras</a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="aljezur">
-      <div class="section__head">
-        <h2>Semana em Aljezur — plano leve (28/06 → 02/07)</h2>
-        <p class="muted">Objetivo: descanso. Praia cedo, piscina ao meio-dia, miradouros ao fim da tarde. Evitar multidões e sol exposto.</p>
+    <section class="panel" id="panel-today" data-panel="today">
+      <div class="panel__head">
+        <h1>Modo Plano do dia</h1>
+        <p class="muted">Escolhe o dia e vê só o essencial (manhã / meio‑dia / fim de tarde), com plano B (vento/sol/multidões).</p>
       </div>
 
       <div class="card">
-        <div class="card__title">Estrutura diária (repetível)</div>
         <div class="card__body">
-          <div class="grid3">
-            <div class="mini">
-              <div class="mini__t">Manhã (fresco)</div>
-              <div class="mini__b">Praia / passeio curto</div>
-            </div>
-            <div class="mini">
-              <div class="mini__t">Meio-dia (calor)</div>
-              <div class="mini__b">Piscina + sesta + refeição em casa</div>
-            </div>
-            <div class="mini">
-              <div class="mini__t">Fim de tarde</div>
-              <div class="mini__b">Miradouro / jantar cedo (reservas)</div>
-            </div>
+          <div class="grid2">
+            <label>Dia
+              <select id="daySelect"></select>
+            </label>
+            <label>Estilo
+              <select id="dayMode">
+                <option value="A">Plano A (normal)</option>
+                <option value="B">Plano B (vento/sol/cheio)</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="day" id="dayOut" aria-live="polite"></div>
+
+          <div class="row">
+            <button class="btn btn--ghost" id="dayCopy">Copiar plano do dia</button>
+            <button class="btn btn--ghost" id="dayPin">Fixar este dia como default</button>
           </div>
         </div>
       </div>
 
-      <div class="cards">
-        <article class="card">
-          <div class="card__title">Dom 28/06 — Aterragem</div>
-          <div class="card__body">
-            <ul class="list">
-              <li>Piscina + unpack.</li>
-              <li>Fim da tarde: miradouro/Arrifana “só para ver” (sem ficar horas).</li>
-            </ul>
+      <div class="card">
+        <div class="card__title">Rotina recomendada (para reduzir stress)</div>
+        <div class="card__body">
+          <div class="grid3">
+            <div class="mini"><div class="mini__t">Manhã (fresco)</div><div class="mini__b">Praia / passeio curto</div></div>
+            <div class="mini"><div class="mini__t">Meio‑dia (calor)</div><div class="mini__b">Piscina + sesta + refeição em casa</div></div>
+            <div class="mini"><div class="mini__t">Fim de tarde</div><div class="mini__b">Miradouro / jantar cedo</div></div>
           </div>
-        </article>
-
-        <article class="card">
-          <div class="card__title">Seg 29/06 — Mercado + vila</div>
-          <div class="card__body">
-            <ul class="list">
-              <li><strong>Mercado Municipal de Aljezur</strong>: 08:00–13:00 (Seg–Sáb).</li>
-              <li>Passeio curto na vila + castelo (rápido, cedo).</li>
-            </ul>
-            <div class="row">
-              <a class="btn btn--small" target="_blank" rel="noopener" href="https://www.mercadosdoalgarve.pt/mercados/mercado-municipal-aljezur/">Horário do Mercado</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card__title">Ter 30/06 — Praia “fácil” (manhã)</div>
-          <div class="card__body">
-            <ul class="list">
-              <li>Escolher praia com acessos simples e ficar perto das entradas (menos tralha).</li>
-              <li>Se ventar muito: plano B = só miradouro/café + piscina.</li>
-            </ul>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card__title">Qua 01/07 — Odeceixe (rio + mar)</div>
-          <div class="card__body">
-            <ul class="list">
-              <li>Bom para crianças: na <strong>maré baixa</strong> formam-se lagoas no areal e dá para escolher rio ou mar.</li>
-              <li>Vai cedo para evitar estacionamento cheio.</li>
-            </ul>
-            <div class="row">
-              <a class="btn btn--small" target="_blank" rel="noopener" href="https://www.visitportugal.com/pt-pt/content/praia-de-odeceixe">Info oficial (VisitPortugal)</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card__title">Qui 02/07 — Rîbat + pôr do sol</div>
-          <div class="card__body">
-            <ul class="list">
-              <li><strong>Rîbat da Arrifana</strong> (Ponta da Atalaia, Vale da Telha) — curto, muito visual.</li>
-              <li>Fim de tarde: escolher um spot abrigado do vento e regressar cedo.</li>
-            </ul>
-            <div class="row">
-              <a class="btn btn--small" target="_blank" rel="noopener" href="https://mupih.cm-aljezur.pt/pt/605/r%C3%AEbat-da-arrifana.aspx">Info (Município)</a>
-              <a class="btn btn--small btn--ghost" target="_blank" rel="noopener" href="http://www.monumentos.gov.pt/Site/APP_PagesUser/SIPA.aspx?id=31965">Ficha SIPA</a>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <div class="callout">
-        <strong>Reservas:</strong> em julho, jantares cedo (19:00–19:30) reduzem filas e ajudam o bebé a manter rotina.
+        </div>
       </div>
     </section>
 
-    <section class="section" id="ev">
-      <div class="section__head">
-        <h2>Ferramentas EV (rápidas)</h2>
-        <p class="muted">Tudo funciona offline e guarda os teus valores no dispositivo.</p>
+
+    <section class="panel" id="panel-trip" data-panel="trip">
+      <div class="panel__head">
+        <h1>Viagem (ida e volta)</h1>
+        <p class="muted">Plano confortável (bebé ~4/4h). Regras: chegar a carregadores ≥20% e ao destino ≥30%. Condução: 120 km/h.</p>
       </div>
 
       <div class="cards">
         <article class="card">
-          <div class="card__title">1) Planeador de SOC por troço</div>
+          <div class="card__title">Ida — Sáb 27/06</div>
+          <div class="card__body">
+            <ol class="list">
+              <li><strong>Leiria (HPC):</strong> pausa + 15–25 min DC. <a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=IONITY%20Leiria%20A1%20%C3%A1rea%20de%20servi%C3%A7o%20Cepsa">Abrir no Maps</a></li>
+              <li><strong>Lisboa — Parque das Nações:</strong> <span class="tag">Pavilhão do Conhecimento</span> + almoço.</li>
+              <li><strong>Carregar (AC 22 kW):</strong> Centro Vasco da Gama (piso -1). <a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Centro%20Vasco%20da%20Gama%20carregamento%20ve%C3%ADculos%20el%C3%A9tricos">Maps</a></li>
+              <li><strong>Almodôvar (HPC):</strong> top‑up 10–20 min para chegar com ≥30%. <a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=IONITY%20Almod%C3%B4var%20A2%20%C3%A1rea%20de%20servi%C3%A7o">Abrir no Maps</a></li>
+              <li><strong>Destino:</strong> Vila da Telha (Aljezur).</li>
+            </ol>
+
+            <details class="details">
+              <summary>Checklist rápida (antes de arrancar)</summary>
+              <div class="details__body">
+                <ul class="list">
+                  <li>Carro a 100% + cabo Type2 + granny 10A.</li>
+                  <li>Kit bebé rápido acessível (fralda + resguardo + muda + saco lixo).</li>
+                  <li>Snack/água + brinquedo “novo” pequeno para o de 4 anos.</li>
+                </ul>
+              </div>
+            </details>
+
+            <div class="row">
+              <a class="btn btn--small" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=Porto&destination=Aljezur&waypoints=IONITY%20Leiria%20A1%20%C3%A1rea%20de%20servi%C3%A7o%20Cepsa|Pavilh%C3%A3o%20do%20Conhecimento%2C%20Lisboa|IONITY%20Almod%C3%B4var%20A2%20%C3%A1rea%20de%20servi%C3%A7o">Abrir rota (Maps)</a>
+              <button class="btn btn--small btn--ghost" id="copyTripIda">Copiar roteiro da ida</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__title">Volta — Sex 03/07</div>
+          <div class="card__body">
+            <ol class="list">
+              <li><strong>Véspera:</strong> usar tomada 10A para sair com ≥90% (ideal 100%).</li>
+              <li><strong>Almodôvar (HPC):</strong> pausa/top‑up se necessário.</li>
+              <li><strong>Lisboa (Vasco da Gama):</strong> almoço + AC 22 kW se útil.</li>
+              <li><strong>Leiria (HPC):</strong> último top‑up para chegar ao Porto com ≥30%.</li>
+            </ol>
+            <div class="row">
+              <a class="btn btn--small" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=Aljezur&destination=Porto&waypoints=IONITY%20Almod%C3%B4var%20A2%20%C3%A1rea%20de%20servi%C3%A7o|Centro%20Vasco%20da%20Gama%2C%20Lisboa|IONITY%20Leiria%20A1%20%C3%A1rea%20de%20servi%C3%A7o%20Cepsa">Abrir rota (Maps)</a>
+              <button class="btn btn--small btn--ghost" id="copyTripVolta">Copiar roteiro da volta</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__title">Pausas do bebé</div>
+          <div class="card__body">
+            <p class="muted">O site tem um planeador de pausas na tab <strong>EV</strong>. Regra prática: pausa curta (fralda + ar) + pausa longa (comer + acalmar).</p>
+            <ul class="list">
+              <li>Ideal: alinhar <strong>Leiria</strong> com a 1ª pausa e <strong>Lisboa</strong> com pausa longa (visita + almoço).</li>
+              <li>Se a rotina mudar para 3h: encurtar troços e usar paragens “sem carregar” só para conforto.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+
+    <section class="panel" id="panel-map" data-panel="map">
+      <div class="panel__head">
+        <h1>Mapa (offline)</h1>
+        <p class="muted">Isto não é um mapa com tiles (isso exige internet). É um <strong>mapa de bolso</strong>: waypoints + rotas + direções resumidas. O site fica guardado offline via cache.</p>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <div class="card__title">Waypoints principais</div>
+          <div class="card__body" id="poiList"></div>
+        </article>
+
+        <article class="card">
+          <div class="card__title">Rotas rápidas</div>
+          <div class="card__body">
+            <div class="grid2">
+              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=Porto&destination=Aljezur&waypoints=IONITY%20Leiria%20A1%20%C3%A1rea%20de%20servi%C3%A7o%20Cepsa|Pavilh%C3%A3o%20do%20Conhecimento%2C%20Lisboa|IONITY%20Almod%C3%B4var%20A2%20%C3%A1rea%20de%20servi%C3%A7o">🧭 Ida (Maps)</a>
+              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=Aljezur&destination=Porto&waypoints=IONITY%20Almod%C3%B4var%20A2%20%C3%A1rea%20de%20servi%C3%A7o|Centro%20Vasco%20da%20Gama%2C%20Lisboa|IONITY%20Leiria%20A1%20%C3%A1rea%20de%20servi%C3%A7o%20Cepsa">🧭 Volta (Maps)</a>
+            </div>
+
+            <details class="details">
+              <summary>Direções resumidas (offline)</summary>
+              <div class="details__body" id="offlineDirections"></div>
+            </details>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__title">Testar offline</div>
+          <div class="card__body">
+            <ol class="list">
+              <li>Abre o site 1x com internet (para o cache guardar).</li>
+              <li>No telemóvel: ativa modo avião e reabre — deve funcionar.</li>
+              <li>Links externos (Maps) vão falhar offline, mas o conteúdo fica disponível.</li>
+            </ol>
+          </div>
+        </article>
+      </div>
+    </section>
+
+
+    <section class="panel" id="panel-home" data-panel="home">
+      <div class="panel__head">
+        <h1>Carregar em casa (Vila da Telha)</h1>
+        <p class="muted">Tens tomada 10A. O objetivo é reduzir stress e começar a volta com SOC alto.</p>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <div class="card__title">Plano simples (10A)</div>
+          <div class="card__body">
+            <ul class="list">
+              <li>Regra prática: 10A ≈ <strong>2,3 kW</strong>. Em 8–10h dá uma boa recuperação.</li>
+              <li>Durante a semana: manter 60–90% (se der jeito).</li>
+              <li>Véspera da volta (02/07): subir para 90–100%.</li>
+              <li>Evita extensões baratas; confirma que a ficha não aquece.</li>
+            </ul>
+
+            <div class="form grid2">
+              <label>Horas a carregar
+                <input type="number" id="home_hours" min="1" step="1" value="8" />
+              </label>
+              <label>Potência (kW)
+                <input type="number" id="home_kw" min="1.5" step="0.1" value="2.3" />
+              </label>
+              <label>Eficiência (%)
+                <input type="number" id="home_eff" min="70" max="100" step="1" value="90" />
+              </label>
+              <label>Bateria útil (kWh)
+                <input type="number" id="home_batt" min="30" step="0.1" value="66" />
+              </label>
+            </div>
+            <div class="row">
+              <button class="btn btn--small" id="home_calc">Calcular ganho</button>
+            </div>
+            <div class="result" id="home_out" aria-live="polite"></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__title">Se NÃO der para carregar em casa</div>
+          <div class="card__body">
+            <ul class="list">
+              <li>Estratégia: fazer <strong>1 sessão DC</strong> na zona (ou no caminho para a A2) e depois viajar como planeado.</li>
+              <li>Links de pesquisa rápida (abre no telemóvel):</li>
+            </ul>
+            <div class="grid2">
+              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=carregador%20el%C3%A9trico%20Aljezur">🔎 Carregadores em Aljezur</a>
+              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=carregador%20el%C3%A9trico%20Vale%20da%20Telha">🔎 Carregadores Vale da Telha</a>
+              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=carregador%20el%C3%A9trico%20Lagos">🔎 Lagos (alternativa)</a>
+              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=carregador%20el%C3%A9trico%20Odemira">🔎 Odemira (alternativa)</a>
+            </div>
+            <p class="muted tiny">Dica: se estiver cheio, usa a app que preferires para ver disponibilidade (MOBI.E/miio/etc.).</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__title">Mini-checklist (casa)</div>
+          <div class="card__body">
+            <ul class="list">
+              <li>Granny 10A + cabo bem encaixado.</li>
+              <li>Tomada firme, sem folgas; verificar aquecimento após 15 min.</li>
+              <li>Se o disjuntor cair: reduzir corrente (se o carregador permitir) ou usar alternativa pública.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+
+    <section class="panel" id="panel-ev" data-panel="ev">
+      <div class="panel__head">
+        <h1>Ferramentas EV</h1>
+        <p class="muted">Guarda valores no dispositivo. Funciona offline.</p>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <div class="card__title">1) SOC por troço</div>
           <div class="card__body">
             <div class="form grid2">
-              <label>Distância do troço (km)
+              <label>Distância (km)
                 <input type="number" id="soc_distance" min="1" step="1" value="200" />
               </label>
               <label>Consumo (kWh/100km)
-                <input type="number" id="soc_consumption" min="10" step="0.1" value="19.0" />
+                <input type="number" id="soc_consumption" min="10" step="0.1" value="19.5" />
               </label>
               <label>Bateria útil (kWh)
                 <input type="number" id="soc_battery" min="30" step="0.1" value="66" />
@@ -294,10 +287,10 @@
               <label>SOC à partida (%)
                 <input type="number" id="soc_start" min="0" max="100" step="1" value="80" />
               </label>
-              <label>SOC mínimo ao chegar (%)
+              <label>Mínimo à chegada (%)
                 <input type="number" id="soc_min_arrive" min="0" max="100" step="1" value="30" />
               </label>
-              <label>Margem extra (vento/AC) (%)
+              <label>Buffer (vento/AC) (%)
                 <input type="number" id="soc_buffer" min="0" max="30" step="1" value="5" />
               </label>
             </div>
@@ -328,7 +321,7 @@
               <label>Eficiência (%)
                 <input type="number" id="ct_eff" min="70" max="100" step="1" value="92" />
               </label>
-              <label>Tempo extra (min)
+              <label>Overhead (min)
                 <input type="number" id="ct_overhead" min="0" step="1" value="5" />
               </label>
             </div>
@@ -336,7 +329,6 @@
               <button class="btn btn--small" id="ct_calc">Calcular</button>
             </div>
             <div class="result" id="ct_out" aria-live="polite"></div>
-            <p class="muted tiny">Nota: DC tem curva — usa “potência média” realista (ex.: 90–140 kW em sessões curtas), não o pico.</p>
           </div>
         </article>
 
@@ -347,28 +339,28 @@
               <label>Hora de saída
                 <input type="time" id="bp_depart" value="07:00" />
               </label>
-              <label>Intervalo (horas)
+              <label>Intervalo (h)
                 <input type="number" id="bp_interval" min="1" step="0.5" value="4" />
               </label>
-              <label>Duração total a conduzir (h)
+              <label>Horas a conduzir (h)
                 <input type="number" id="bp_drive" min="1" step="0.5" value="6" />
               </label>
-              <label>Tempo de pausa (min)
+              <label>Pausa (min)
                 <input type="number" id="bp_break" min="5" step="5" value="25" />
               </label>
             </div>
             <div class="row">
-              <button class="btn btn--small" id="bp_calc">Gerar pausas</button>
+              <button class="btn btn--small" id="bp_calc">Gerar</button>
             </div>
             <div class="result" id="bp_out" aria-live="polite"></div>
           </div>
         </article>
 
         <article class="card">
-          <div class="card__title">4) Conversor rápido (kWh ↔ %)</div>
+          <div class="card__title">4) kWh ↔ %</div>
           <div class="card__body">
             <div class="form grid2">
-              <label>Bateria útil (kWh)
+              <label>Bateria (kWh)
                 <input type="number" id="conv_battery" min="30" step="0.1" value="66" />
               </label>
               <label>Energia (kWh)
@@ -388,67 +380,95 @@
       </div>
     </section>
 
-    <section class="section" id="checklists">
-      <div class="section__head">
-        <h2>Checklists (clicáveis)</h2>
-        <p class="muted">Marca o que já está feito. Fica guardado no teu browser (localStorage).</p>
+
+    <section class="panel" id="panel-checks" data-panel="checks">
+      <div class="panel__head">
+        <h1>Checklists</h1>
+        <p class="muted">Clicáveis, com pesquisa. Guardado no dispositivo.</p>
       </div>
 
       <div class="toolbar">
         <input id="checkSearch" class="search" placeholder="Pesquisar item (ex.: fraldas, cabo, protetor)…" />
         <button class="btn btn--small btn--ghost" id="checkReset">Limpar marcas</button>
       </div>
-
       <div class="cards" id="checklistsContainer"></div>
     </section>
 
-    <section class="section" id="notas">
-      <div class="section__head">
-        <h2>Notas rápidas</h2>
-        <p class="muted">Guarda aqui: SOCs reais, consumos, restaurantes, “onde estacionar”, etc.</p>
+
+    <section class="panel" id="panel-notes" data-panel="notes">
+      <div class="panel__head">
+        <h1>Notas</h1>
+        <p class="muted">Guarda SOCs reais, consumos, restaurantes, estacionamento, etc.</p>
       </div>
 
       <div class="card">
         <div class="card__body">
-          <textarea id="notes" class="notes" rows="10" placeholder="Ex.:\n- Ida: saí de Leiria com 68%\n- Consumo A2: 20.5 kWh/100km (vento)\n- Restaurante: reservar às 19:15\n"></textarea>
+          <textarea id="notes" class="notes" rows="12" placeholder="Ex.:
+- Ida: saí de Leiria com 68%
+- Consumo A2: 20.5 kWh/100km (vento)
+- Reservar jantar: 19:15
+"></textarea>
           <div class="row">
             <button class="btn btn--small" id="notesSave">Guardar</button>
             <button class="btn btn--small btn--ghost" id="notesClear">Apagar</button>
           </div>
-          <p class="muted tiny">Dica: se trocares de telemóvel, copia o texto e envia-te por email/Teams/WhatsApp.</p>
         </div>
       </div>
     </section>
 
-    <section class="section" id="fontes">
-      <div class="section__head">
-        <h2>Fontes úteis</h2>
-        <p class="muted">Links oficiais / referência para horários e informação.</p>
+
+    <section class="panel" id="panel-overview" data-panel="overview">
+      <div class="panel__head">
+        <h1>Info rápida</h1>
+        <p class="muted">Atalhos e fontes (horários/infos). O site é leve e sem trackers.</p>
       </div>
-      <div class="card">
-        <div class="card__body">
-          <ul class="list">
-            <li><a target="_blank" rel="noopener" href="https://www.pavconhecimento.pt/pt/visite-nos/bilheteira">Pavilhão do Conhecimento — bilheteira/horários</a></li>
-            <li><a target="_blank" rel="noopener" href="https://oceanario.pt/">Oceanário de Lisboa — horário</a></li>
-            <li><a target="_blank" rel="noopener" href="https://www.centrovascodagama.pt/servicos/carregamento-de-viaturas-eletricas/">Centro Vasco da Gama — carregamento EV (AC 22 kW)</a></li>
-            <li><a target="_blank" rel="noopener" href="https://chargemap.com/pt-pt/ionity-leiria-area-de-servico-cepsa-a1-leiria-s-n-pk-11.html">IONITY Leiria (Chargemap)</a></li>
-            <li><a target="_blank" rel="noopener" href="https://chargemap.com/pt-pt/ionity-25.html">IONITY Almodôvar (Chargemap)</a></li>
-            <li><a target="_blank" rel="noopener" href="https://www.mercadosdoalgarve.pt/mercados/mercado-municipal-aljezur/">Mercado Municipal de Aljezur — horário</a></li>
-            <li><a target="_blank" rel="noopener" href="https://www.visitportugal.com/pt-pt/content/praia-de-odeceixe">Praia de Odeceixe — VisitPortugal</a></li>
-            <li><a target="_blank" rel="noopener" href="https://mupih.cm-aljezur.pt/pt/605/r%C3%AEbat-da-arrifana.aspx">Rîbat da Arrifana — Município de Aljezur</a></li>
-            <li><a target="_blank" rel="noopener" href="http://www.monumentos.gov.pt/Site/APP_PagesUser/SIPA.aspx?id=31965">Rîbat da Arrifana — SIPA/Monumentos</a></li>
-          </ul>
-        </div>
+
+      <div class="cards">
+        <article class="card">
+          <div class="card__title">Atalhos Maps</div>
+          <div class="card__body">
+            <div class="grid2">
+              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Pavilh%C3%A3o%20do%20Conhecimento%2C%20Lisboa">📍 Pavilhão</a>
+              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Centro%20Vasco%20da%20Gama%2C%20Lisboa">🔌 Vasco da Gama</a>
+              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=IONITY%20Leiria%20A1%20%C3%A1rea%20de%20servi%C3%A7o%20Cepsa">⚡ IONITY Leiria</a>
+              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=IONITY%20Almod%C3%B4var%20A2%20%C3%A1rea%20de%20servi%C3%A7o">⚡ IONITY Almodôvar</a>
+              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Mercado%20Municipal%20de%20Aljezur">🛒 Mercado Aljezur</a>
+              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=R%C3%AEbat%20da%20Arrifana%20Ponta%20da%20Atalaia">🏛️ Rîbat</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__title">Fontes úteis</div>
+          <div class="card__body">
+            <ul class="list">
+              <li><a class="link" target="_blank" rel="noopener" href="https://www.pavconhecimento.pt/pt/visite-nos/bilheteira">Pavilhão — bilheteira/horários</a></li>
+              <li><a class="link" target="_blank" rel="noopener" href="https://oceanario.pt/">Oceanário — horários</a></li>
+              <li><a class="link" target="_blank" rel="noopener" href="https://www.centrovascodagama.pt/servicos/carregamento-de-viaturas-eletricas/">Vasco da Gama — carregamento EV</a></li>
+              <li><a class="link" target="_blank" rel="noopener" href="https://www.mercadosdoalgarve.pt/mercados/mercado-municipal-aljezur/">Mercado Municipal Aljezur</a></li>
+              <li><a class="link" target="_blank" rel="noopener" href="https://www.visitportugal.com/pt-pt/content/praia-de-odeceixe">Praia de Odeceixe — VisitPortugal</a></li>
+              <li><a class="link" target="_blank" rel="noopener" href="https://mupih.cm-aljezur.pt/pt/605/r%C3%AEbat-da-arrifana.aspx">Rîbat — Município</a></li>
+              <li><a class="link" target="_blank" rel="noopener" href="http://www.monumentos.gov.pt/Site/APP_PagesUser/SIPA.aspx?id=31965">Rîbat — SIPA</a></li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__title">Sugestões rápidas</div>
+          <div class="card__body">
+            <ul class="list">
+              <li>Praias cedo; 12:00–15:30 = piscina/sombra.</li>
+              <li>Jantar cedo (19:00–19:30) para evitar filas e manter rotina do bebé.</li>
+              <li>Em DC: eficiente até ~70–80% (curva abranda depois).</li>
+            </ul>
+          </div>
+        </article>
       </div>
     </section>
 
     <footer class="footer">
-      <div class="row row--spread">
-        <span class="muted tiny">Feito para o Miguel — funciona offline (sem trackers).</span>
-        <a class="muted tiny" href="#top">⬆️ topo</a>
-      </div>
+      <span class="muted tiny">v2 — tabs + modo do dia + offline + light mode.</span>
     </footer>
-
   </main>
 
   <script src="assets/data.js"></script>
