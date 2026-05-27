@@ -1,5 +1,5 @@
-/* v2 service worker — cache-first for offline */
-const CACHE_NAME = 'aljezur-trip-v2-2026-05-26';
+/* v3 service worker — cache-first for offline */
+const CACHE_NAME = 'aljezur-trip-v3-2026-05-27';
 const ASSETS = [
   './',
   './index.html',
@@ -24,22 +24,18 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const req = event.request;
   const url = new URL(req.url);
-
-  // Only handle same-origin
   if(url.origin !== self.location.origin) return;
 
   event.respondWith(
     caches.match(req).then((cached) => {
       if(cached) return cached;
       return fetch(req).then((resp) => {
-        // cache new GET responses
         if(req.method === 'GET' && resp && resp.status === 200){
           const copy = resp.clone();
           caches.open(CACHE_NAME).then(cache => cache.put(req, copy));
         }
         return resp;
       }).catch(() => {
-        // fallback to index for navigation
         if(req.mode === 'navigate') return caches.match('./index.html');
         return cached;
       });
