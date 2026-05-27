@@ -1,4 +1,4 @@
-// v2 data (editável)
+// v3 data (editável)
 window.TRIP_DATA = {
   meta: {
     title: 'Aljezur 2026',
@@ -52,9 +52,9 @@ window.TRIP_DATA = {
       date: 'Seg 29/06',
       title: 'Mercado + vila',
       A: {
-        morning: { title: 'Manhã', text: 'Mercado Municipal (08:00–13:00) cedo; compras para refeições em casa.', linkText: 'Mercado (Maps)', link: 'https://www.google.com/maps/search/?api=1&query=Mercado%20Municipal%20de%20Aljezur' },
+        morning: { title: 'Manhã', text: 'Mercado Municipal cedo; compras para refeições em casa.', linkText: 'Mercado (Maps)', link: 'https://www.google.com/maps/search/?api=1&query=Mercado%20Municipal%20de%20Aljezur' },
         midday: { title: 'Meio‑dia', text: 'Piscina + sesta + refeição em casa.' },
-        evening: { title: 'Fim de tarde', text: 'Passeio curto na vila + castelo (se estiver fresco).', linkText: 'Aljezur (Maps)', link: 'https://www.google.com/maps/search/?api=1&query=Castelo%20de%20Aljezur' }
+        evening: { title: 'Fim de tarde', text: 'Passeio curto na vila + castelo (se estiver fresco).', linkText: 'Castelo (Maps)', link: 'https://www.google.com/maps/search/?api=1&query=Castelo%20de%20Aljezur' }
       },
       B: {
         morning: { title: 'Manhã', text: 'Mercado rápido + voltar.' },
@@ -66,7 +66,7 @@ window.TRIP_DATA = {
       date: 'Ter 30/06',
       title: 'Praia fácil (cedo)',
       A: {
-        morning: { title: 'Manhã', text: 'Praia cedo (escolher acesso fácil) + sair antes do pico.' },
+        morning: { title: 'Manhã', text: 'Praia cedo (acesso fácil) + sair antes do pico.' },
         midday: { title: 'Meio‑dia', text: 'Piscina + sesta + refeição em casa.' },
         evening: { title: 'Fim de tarde', text: 'Jantar cedo (reservar se necessário).' }
       },
@@ -80,12 +80,12 @@ window.TRIP_DATA = {
       date: 'Qua 01/07',
       title: 'Odeceixe (rio + mar)',
       A: {
-        morning: { title: 'Manhã', text: 'Odeceixe cedo (lagoas na maré baixa são ótimas para crianças).', linkText: 'Odeceixe (Maps)', link: 'https://www.google.com/maps/search/?api=1&query=Praia%20de%20Odeceixe' },
+        morning: { title: 'Manhã', text: 'Odeceixe cedo (lagoas na maré baixa).', linkText: 'Odeceixe (Maps)', link: 'https://www.google.com/maps/search/?api=1&query=Praia%20de%20Odeceixe' },
         midday: { title: 'Meio‑dia', text: 'Voltar para piscina + sesta.' },
         evening: { title: 'Fim de tarde', text: 'Compras rápidas + jantar em casa.' }
       },
       B: {
-        morning: { title: 'Manhã', text: 'Se estacionamento estiver impossível: trocar por praia mais perto e sair cedo.' },
+        morning: { title: 'Manhã', text: 'Se estiver impossível: trocar por praia mais perto e sair cedo.' },
         midday: { title: 'Meio‑dia', text: 'Piscina e descanso.' },
         evening: { title: 'Fim de tarde', text: 'Miradouro local.' }
       }
@@ -96,14 +96,22 @@ window.TRIP_DATA = {
       A: {
         morning: { title: 'Manhã', text: 'Manhã livre/piscina — guardar energia para a volta.' },
         midday: { title: 'Meio‑dia', text: 'Sombra + refeição em casa.' },
-        evening: { title: 'Fim de tarde', text: 'Rîbat da Arrifana (curto) + regressar cedo.', linkText: 'Rîbat (Maps)', link: 'https://www.google.com/maps/search/?api=1&query=R%C3%AEbat%20da%20Arrifana%20Ponta%20da%20Atalaia' }
+        evening: { title: 'Fim de tarde', text: 'Rîbat (curto) + regressar cedo.', linkText: 'Rîbat (Maps)', link: 'https://www.google.com/maps/search/?api=1&query=R%C3%AEbat%20da%20Arrifana%20Ponta%20da%20Atalaia' }
       },
       B: {
         morning: { title: 'Manhã', text: 'Piscina e descanso.' },
         midday: { title: 'Meio‑dia', text: 'Sesta.' },
-        evening: { title: 'Fim de tarde', text: 'Se vento forte: só passeio de carro curto e recolher cedo.' }
+        evening: { title: 'Fim de tarde', text: 'Se vento forte: só passeio curto e recolher cedo.' }
       }
     }
+  ],
+
+  // Lista editável de restaurantes/locais
+  food: [
+    { name: 'Opção 1 (perto de Vale da Telha)', type: 'Casual / fácil com crianças', note: 'Boa para chegar cedo (19:00–19:30).', maps: 'https://www.google.com/maps/search/?api=1&query=restaurante%20Vale%20da%20Telha' },
+    { name: 'Opção 2 (Arrifana)', type: 'Peixe / prato do dia', note: 'Reservar no próprio dia se possível.', maps: 'https://www.google.com/maps/search/?api=1&query=restaurante%20Arrifana' },
+    { name: 'Opção 3 (Aljezur vila)', type: 'Simples / take-away', note: 'Boa para “Plano B” quando o bebé está sensível.', maps: 'https://www.google.com/maps/search/?api=1&query=restaurante%20Aljezur' },
+    { name: 'Backup (Lagos)', type: 'Plano C', note: 'Se forem para sul nalgum dia.', maps: 'https://www.google.com/maps/search/?api=1&query=restaurante%20Lagos%20Portugal' }
   ],
 
   checklists: [

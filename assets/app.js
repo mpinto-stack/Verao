@@ -60,12 +60,13 @@
     setTheme(document.body.classList.contains('dark') ? 'light' : 'dark');
   });
 
-  // Tabs logic
+  // Tabs
   const tabs = $('#tabs');
   const menuBtn = $('#menuBtn');
   const tabBtns = $$('.tab');
   const panels = $$('.panel');
   const defaultTabKey = 'ui.defaultTab';
+  const allowed = ['road','today','trip','map','home','food','ev','checks','notes','overview'];
 
   function activateTab(id, pushHash=true){
     tabBtns.forEach(b=>b.classList.toggle('active', b.dataset.tab===id));
@@ -87,9 +88,12 @@
     el.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') activateTab('overview'); });
   });
 
-  const initial = (location.hash||'').replace('#','') || store.get(defaultTabKey, 'today');
-  const allowed = ['today','trip','map','home','ev','checks','notes','overview'];
-  activateTab(allowed.includes(initial) ? initial : 'today', false);
+  // open tab links
+  $('[data-open-tab="ev"]')?.addEventListener('click', (e)=>{ e.preventDefault(); activateTab('ev'); });
+  $('#openSocTargets')?.addEventListener('click', (e)=>{ e.preventDefault(); activateTab('ev'); });
+
+  const initial = (location.hash||'').replace('#','') || store.get(defaultTabKey, 'road');
+  activateTab(allowed.includes(initial) ? initial : 'road', false);
 
   // Copy helpers
   function copyText(txt){
@@ -102,6 +106,12 @@
   $('#copyTripVolta')?.addEventListener('click', ()=>copyText(
     'Volta: (véspera carregar 10A para 90–100%) → Almodôvar (pausa/top-up) → Lisboa (almoço + AC se útil) → Leiria (último top-up) → Porto. Regras: ≥20% no carregador, ≥30% no destino.'
   ));
+
+  // --- Utils
+  function fmt(n, d=1){ return (Math.round(n*10**d)/10**d).toFixed(d); }
+  function norm(s){
+    return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+  }
 
   // --- Modo Plano do dia
   const daySelect = $('#daySelect');
@@ -179,6 +189,25 @@
     ).join('');
   }
 
+  // --- Food list
+  const foodList = $('#foodList');
+  function renderFood(){
+    if(!window.TRIP_DATA || !foodList) return;
+    const food = window.TRIP_DATA.food || [];
+    if(!food.length){ foodList.innerHTML = '<p class="muted">Sem itens.</p>'; return; }
+    foodList.innerHTML = food.map(f=>
+      `<div class="slot"><div class="slot__t">${f.name}</div>`+
+      `<div class="muted">${f.type||''}${f.note?(' • '+f.note):''}</div>`+
+      `<div style="margin-top:6px"><a class="link" target="_blank" rel="noopener" href="${f.maps}">Abrir no Maps</a></div></div>`
+    ).join('');
+  }
+
+  $('#food_copy_msg')?.addEventListener('click', ()=>{
+    const msg = 'Olá! Somos 2 adultos + uma criança (4 anos) + um bebé (3 meses). Gostávamos de reservar mesa para hoje às 19:15/19:30. Precisamos de espaço para carrinho. Obrigado!';
+    copyText(msg);
+    $('#food_msg_out').textContent = msg;
+  });
+
   // --- EV calculators persistence
   function bindPersist(ids, prefix){
     ids.forEach(id=>{
@@ -186,19 +215,24 @@
       if(!el) return;
       const k = `${prefix}.${id}`;
       const saved = store.get(k, null);
-      if(saved !== null && saved !== undefined) el.value = saved;
+      if(saved !== null && saved !== undefined && saved !== '') el.value = saved;
       el.addEventListener('input', ()=> store.set(k, el.value));
     });
   }
+
   bindPersist(['soc_distance','soc_consumption','soc_battery','soc_start','soc_min_arrive','soc_buffer'], 'ev');
   bindPersist(['ct_from','ct_to','ct_battery','ct_power','ct_eff','ct_overhead'], 'ev');
   bindPersist(['bp_depart','bp_interval','bp_drive','bp_break'], 'ev');
   bindPersist(['conv_battery','conv_kwh','conv_pct'], 'ev');
   bindPersist(['home_hours','home_kw','home_eff','home_batt'], 'home');
 
-  function fmt(n, d=1){ return (Math.round(n*10**d)/10**d).toFixed(d); }
+  // Targets SOC persistence
+  bindPersist(['t_cons','t_buffer','t_batt','t_eff','t_km1','t_km2','t_km3','t_km4'], 'targets');
 
-  // SOC planner
+  // Road persistence
+  bindPersist(['road_depart','road_interval','road_drive','road_break'], 'road');
+
+  // --- SOC planner
   const socOut = $('#soc_out');
   function socCalc(){
     const km = +$('#soc_distance').value;
@@ -231,7 +265,7 @@
     socCalc();
   });
 
-  // Charge time
+  // --- Charge time
   const ctOut = $('#ct_out');
   function ctCalc(){
     const from = +$('#ct_from').value;
@@ -252,8 +286,7 @@
   }
   $('#ct_calc')?.addEventListener('click', ctCalc);
 
-  // Break planner
-  const bpOut = $('#bp_out');
+  // --- Break planners
   function addMinutes(t, mins){
     const [h,m] = t.split(':').map(Number);
     const total = h*60+m+mins;
@@ -261,6 +294,8 @@
     const mm = ((total%60)+60)%60;
     return String(hh).padStart(2,'0')+':'+String(mm).padStart(2,'0');
   }
+
+  const bpOut = $('#bp_out');
   function bpCalc(){
     const depart = $('#bp_depart').value;
     const intervalH = +$('#bp_interval').value;
@@ -287,7 +322,35 @@
   }
   $('#bp_calc')?.addEventListener('click', bpCalc);
 
-  // Converter
+  // Road breaks
+  const roadOut = $('#road_breaks_out');
+  function roadBreaksCalc(){
+    const depart = $('#road_depart').value;
+    const intervalH = +$('#road_interval').value;
+    const driveH = +$('#road_drive').value;
+    const breakMin = +$('#road_break').value;
+
+    const intervalMin = Math.round(intervalH*60);
+    const totalDriveMin = Math.round(driveH*60);
+
+    let t = depart;
+    let driven = 0;
+    let i = 1;
+    const lines = [];
+    while(driven + intervalMin < totalDriveMin){
+      t = addMinutes(t, intervalMin);
+      driven += intervalMin;
+      const end = addMinutes(t, breakMin);
+      lines.push(`Pausa ${i}: ${t} → ${end}`);
+      t = end;
+      i++;
+    }
+    roadOut.innerHTML = lines.length ? '<pre style="margin:0">'+lines.join('
+')+'</pre>' : 'Sem pausas intermédias.';
+  }
+  $('#road_breaks_calc')?.addEventListener('click', roadBreaksCalc);
+
+  // --- Converter
   const convOut = $('#conv_out');
   function kwhToPct(){
     const batt = +$('#conv_battery').value;
@@ -306,7 +369,7 @@
   $('#conv_kwh_to_pct')?.addEventListener('click', kwhToPct);
   $('#conv_pct_to_kwh')?.addEventListener('click', pctToKwh);
 
-  // Home charging calculator
+  // --- Home charging calculator
   const homeOut = $('#home_out');
   function homeCalc(){
     const h = +$('#home_hours').value;
@@ -319,29 +382,176 @@
   }
   $('#home_calc')?.addEventListener('click', homeCalc);
 
-  // Checklists
+  // --- Targets SOC
+  const tOut = $('#t_out');
+
+  function calcTargets(){
+    const cons = +$('#t_cons').value;      // kWh/100km
+    const buffer = +$('#t_buffer').value; // %
+    const batt = +$('#t_batt').value;     // kWh
+    const eff = +$('#t_eff').value/100;   // used only to show required energy from charger
+
+    const kms = [
+      +($('#t_km1').value||0),
+      +($('#t_km2').value||0),
+      +($('#t_km3').value||0),
+      +($('#t_km4').value||0)
+    ];
+
+    const minsArr = [20,20,20,30];
+
+    function legNeedPct(km){
+      const energy = km * cons / 100.0;
+      const pct = (energy / batt)*100.0;
+      return {energy, pct};
+    }
+
+    // compute required departure SOC for each leg
+    const dep = [];
+    const rows = [];
+    for(let i=0;i<4;i++){
+      if(!(kms[i]>0)){
+        rows.push(`<li>Troço ${i+1}: inserir km para calcular.</li>`);
+        dep.push(null);
+        continue;
+      }
+      const need = legNeedPct(kms[i]);
+      const req = minsArr[i] + buffer + need.pct;
+      dep.push(req);
+      const reqKwhFromGrid = (batt*(req/100)) / eff; // approx energy that must be in battery / eff to account for losses (rough)
+      rows.push(`<li><strong>Troço ${i+1}</strong> (${kms[i]} km): usar ${fmt(need.energy,1)} kWh → ${fmt(need.pct,1)}%. `+
+        `Saída mínima: <strong>${fmt(req,1)}%</strong> (chegar ≥${minsArr[i]}% + buffer ${buffer}%).</li>`);
+    }
+
+    // sanity: cap >100
+    const caps = dep.map(v => (v===null?null: Math.min(100, v)));
+    const anyOver = dep.some(v => v!==null and v>100);
+
+    let warn = '';
+    if(anyOver){
+      warn = `<div class="slot"><div class="slot__t">⚠️ Atenção</div><div>Algum troço requer saída >100% com estes parâmetros. Revê consumo/buffer/distância ou adiciona paragem.</div></div>`;
+    }
+
+    tOut.innerHTML = `${warn}<ul class="list">${rows.join('')}</ul>`;
+
+    // store compact summary for Road tab
+    const summary = { kms, cons, buffer, batt, minsArr, dep: caps };
+    store.set('targets.summary', summary);
+    return summary;
+  }
+
+  // helper fix for python mistake: use correct JS boolean
+  function hasOver(dep){
+    return dep.some(v => v!==null && v>100);
+  }
+
+  function calcTargetsFixed(){
+    const cons = +$('#t_cons').value;
+    const buffer = +$('#t_buffer').value;
+    const batt = +$('#t_batt').value;
+    const eff = +$('#t_eff').value/100;
+    const kms = [
+      +($('#t_km1').value||0),
+      +($('#t_km2').value||0),
+      +($('#t_km3').value||0),
+      +($('#t_km4').value||0)
+    ];
+    const minsArr = [20,20,20,30];
+
+    function legNeedPct(km){
+      const energy = km * cons / 100.0;
+      const pct = (energy / batt)*100.0;
+      return {energy, pct};
+    }
+
+    const dep = [];
+    const rows = [];
+    for(let i=0;i<4;i++){
+      if(!(kms[i]>0)){
+        rows.push(`<li>Troço ${i+1}: inserir km para calcular.</li>`);
+        dep.push(null);
+        continue;
+      }
+      const need = legNeedPct(kms[i]);
+      const req = minsArr[i] + buffer + need.pct;
+      dep.push(req);
+      rows.push(`<li><strong>Troço ${i+1}</strong> (${kms[i]} km): usar ${fmt(need.energy,1)} kWh → ${fmt(need.pct,1)}%. `+
+        `Saída mínima: <strong>${fmt(req,1)}%</strong> (chegar ≥${minsArr[i]}% + buffer ${buffer}%).</li>`);
+    }
+
+    const caps = dep.map(v => (v===null?null: Math.min(100, v)));
+    const anyOver = hasOver(dep);
+    let warn = '';
+    if(anyOver){
+      warn = `<div class="slot"><div class="slot__t">⚠️ Atenção</div><div>Algum troço requer saída >100% com estes parâmetros. Revê consumo/buffer/distância ou adiciona paragem.</div></div>`;
+    }
+
+    // extra: show how much to add at each stop if you choose to depart at the minimum
+    const extra = [];
+    // assume you arrive at minimum (minsArr) each time (conservative), then you need to charge up to dep for next leg.
+    // charging needed from Leiria for leg2, from Lisboa for leg3, from Almodovar for leg4
+    for(let i=1;i<4;i++){
+      if(dep[i]===null) { extra.push(null); continue; }
+      const addPct = Math.max(0, dep[i] - minsArr[i-1]);
+      const addKwh = (addPct/100)*batt;
+      extra.push({addPct, addKwh});
+    }
+
+    const extraHtml = `<div class="slot"><div class="slot__t">Carga mínima (se chegares nos mínimos)</div>`+
+      `<div class="muted">Leiria: +${extra[1]?fmt(extra[1].addPct,1):'?'}% (${extra[1]?fmt(extra[1].addKwh,1):'?'} kWh) • `+
+      `Lisboa: +${extra[2]?fmt(extra[2].addPct,1):'?'}% (${extra[2]?fmt(extra[2].addKwh,1):'?'} kWh) • `+
+      `Almodôvar: +${extra[3]?fmt(extra[3].addPct,1):'?'}% (${extra[3]?fmt(extra[3].addKwh,1):'?'} kWh)</div></div>`;
+
+    tOut.innerHTML = `${warn}${extraHtml}<ul class="list">${rows.join('')}</ul>`;
+
+    const summary = { kms, cons, buffer, batt, minsArr, dep: caps };
+    store.set('targets.summary', summary);
+    return summary;
+  }
+
+  $('#t_calc')?.addEventListener('click', calcTargetsFixed);
+  $('#t_fill')?.addEventListener('click', ()=>{
+    // example-only values; user should replace with real Maps distances
+    if(!$('#t_km1').value) $('#t_km1').value = 190;
+    if(!$('#t_km2').value) $('#t_km2').value = 140;
+    if(!$('#t_km3').value) $('#t_km3').value = 170;
+    if(!$('#t_km4').value) $('#t_km4').value = 140;
+    calcTargetsFixed();
+  });
+
+  // Road quick calc uses saved values
+  const roadSocOut = $('#road_soc_out');
+  function roadSocQuick(){
+    const s = store.get('targets.summary', null);
+    if(!s){ roadSocOut.textContent = 'Ainda não há targets guardados. Vai à tab EV → Targets de SOC e calcula.'; return; }
+    const [a,b,c,d] = s.dep;
+    roadSocOut.innerHTML = `Saídas mínimas (com buffer ${s.buffer}%):`+
+      `<br>Porto→Leiria: <strong>${a?fmt(a,1):'?'}%</strong>`+
+      `<br>Leiria→Lisboa: <strong>${b?fmt(b,1):'?'}%</strong>`+
+      `<br>Lisboa→Almodôvar: <strong>${c?fmt(c,1):'?'}%</strong>`+
+      `<br>Almodôvar→Vila da Telha: <strong>${d?fmt(d,1):'?'}%</strong>`;
+  }
+  $('#road_soc_quick')?.addEventListener('click', roadSocQuick);
+
+  // --- Checklists
   const ctn = $('#checklistsContainer');
   const search = $('#checkSearch');
   const resetBtn = $('#checkReset');
   const stateKey = 'check.state';
   let checked = store.get(stateKey, {});
-  function norm(s){ return (s||'').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu,''); }
 
   function renderChecks(){
     if(!ctn || !window.TRIP_DATA) return;
     const q = norm(search?.value || '');
     ctn.innerHTML = '';
-
     window.TRIP_DATA.checklists.forEach(list=>{
       const card = document.createElement('article');
       card.className = 'card';
       const title = document.createElement('div');
       title.className = 'card__title';
       title.textContent = list.title;
-
       const body = document.createElement('div');
       body.className = 'card__body';
-
       const ul = document.createElement('ul');
       ul.style.listStyle='none';
       ul.style.padding='0';
@@ -352,18 +562,15 @@
         const id = `${list.id}.${idx}`;
         if(q && !norm(item).includes(q)) return;
         shown++;
-
         const li = document.createElement('li');
         li.style.display='flex';
         li.style.alignItems='center';
         li.style.gap='10px';
         li.style.padding='8px 0';
         li.style.borderBottom='1px solid var(--border)';
-
         const cb = document.createElement('input');
         cb.type='checkbox';
         cb.checked = !!checked[id];
-
         const span = document.createElement('span');
         span.textContent = item;
         function sync(){
@@ -371,13 +578,11 @@
           span.style.textDecoration = cb.checked ? 'line-through' : 'none';
         }
         sync();
-
         cb.addEventListener('change', ()=>{
           checked[id] = cb.checked;
           store.set(stateKey, checked);
           sync();
         });
-
         li.appendChild(cb);
         li.appendChild(span);
         ul.appendChild(li);
@@ -415,23 +620,29 @@
     $('#notesClear')?.addEventListener('click', ()=>{ notes.value=''; store.set(notesKey,''); toast('Notas apagadas'); });
   }
 
-  // Init content
+  // Road notes
+  const roadNotes = $('#road_notes');
+  const roadNotesKey = 'road.notes';
+  if(roadNotes){
+    roadNotes.value = store.get(roadNotesKey, '');
+    $('#road_notes_save')?.addEventListener('click', ()=>{ store.set(roadNotesKey, roadNotes.value); toast('Guardado ✅'); });
+    $('#road_notes_clear')?.addEventListener('click', ()=>{ roadNotes.value=''; store.set(roadNotesKey,''); toast('Apagado'); });
+  }
+
+  // Init
   function init(){
     renderPOI();
     renderDirections();
+    renderFood();
     initDay();
     renderChecks();
-    // run default calculations
+    // run defaults
     socCalc(); ctCalc(); bpCalc(); kwhToPct(); homeCalc();
-  }
-
-  function initDay(){
-    if(!window.TRIP_DATA || !daySelect) return;
-    daySelect.innerHTML = window.TRIP_DATA.dailyPlans
-      .map((d,i)=>`<option value="${i}">${d.date} — ${d.title}</option>`).join('');
-    const saved = store.get(dayKey, 0);
-    daySelect.value = String(saved);
-    renderDay();
+    roadBreaksCalc();
+    // try render saved targets in road
+    roadSocQuick();
+    // compute targets if already filled
+    if($('#t_km1')?.value || $('#t_km2')?.value || $('#t_km3')?.value || $('#t_km4')?.value) calcTargetsFixed();
   }
 
   init();
