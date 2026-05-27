@@ -46,7 +46,6 @@
       <strong>Offline:</strong> o site funciona, mas links externos (Maps/sites) precisam de internet.
     </div>
 
-    <!-- MODO ESTRADA (minimal) -->
     <section class="panel" id="panel-road" data-panel="road">
       <div class="panel__head">
         <h1>Modo Estrada (minimal)</h1>
@@ -95,7 +94,7 @@
             <p class="muted">Mete as distâncias reais (do Maps) e obténs o SOC mínimo de saída em cada ponto.</p>
             <div class="row">
               <a class="btn btn--small" href="#" data-open-tab="ev" id="openSocTargets">Abrir calculadora completa</a>
-              <button class="btn btn--small btn--ghost" id="road_soc_quick">Calcular com valores guardados</button>
+              <button class="btn btn--small btn--ghost" id="road_soc_quick">Ver targets guardados</button>
             </div>
             <div class="result" id="road_soc_out" aria-live="polite"></div>
           </div>
@@ -114,14 +113,11 @@
       </div>
     </section>
 
-
-    <!-- PLANO DO DIA -->
     <section class="panel" id="panel-today" data-panel="today">
       <div class="panel__head">
         <h1>Modo Plano do dia</h1>
         <p class="muted">Escolhe o dia e vê só o essencial (manhã / meio‑dia / fim de tarde), com plano B (vento/sol/multidões).</p>
       </div>
-
       <div class="card">
         <div class="card__body">
           <div class="grid2">
@@ -142,487 +138,152 @@
           </div>
         </div>
       </div>
-
-      <div class="card">
-        <div class="card__title">Rotina recomendada (para reduzir stress)</div>
-        <div class="card__body">
-          <div class="grid3">
-            <div class="mini"><div class="mini__t">Manhã (fresco)</div><div class="mini__b">Praia / passeio curto</div></div>
-            <div class="mini"><div class="mini__t">Meio‑dia (calor)</div><div class="mini__b">Piscina + sesta + refeição em casa</div></div>
-            <div class="mini"><div class="mini__t">Fim de tarde</div><div class="mini__b">Miradouro / jantar cedo</div></div>
-          </div>
-        </div>
-      </div>
     </section>
 
-
-    <!-- VIAGEM -->
     <section class="panel" id="panel-trip" data-panel="trip">
       <div class="panel__head">
         <h1>Viagem (ida e volta)</h1>
         <p class="muted">Plano confortável (bebé ~4/4h). Regras: chegar a carregadores ≥20% e ao destino ≥30%. Condução: 120 km/h.</p>
       </div>
-
       <div class="cards">
-        <article class="card">
-          <div class="card__title">Ida — Sáb 27/06</div>
+        <article class="card"><div class="card__title">Ida — Sáb 27/06</div>
           <div class="card__body">
             <ol class="list">
               <li><strong>Leiria (HPC):</strong> pausa + 15–25 min DC. <a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=IONITY%20Leiria%20A1%20%C3%A1rea%20de%20servi%C3%A7o%20Cepsa">Abrir no Maps</a></li>
-              <li><strong>Lisboa — Parque das Nações:</strong> <span class="tag">Pavilhão do Conhecimento</span> + almoço.</li>
-              <li><strong>Carregar (AC 22 kW):</strong> Centro Vasco da Gama (piso -1). <a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Centro%20Vasco%20da%20Gama%20carregamento%20ve%C3%ADculos%20el%C3%A9tricos">Maps</a></li>
-              <li><strong>Almodôvar (HPC):</strong> top‑up 10–20 min para chegar com ≥30%. <a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=IONITY%20Almod%C3%B4var%20A2%20%C3%A1rea%20de%20servi%C3%A7o">Abrir no Maps</a></li>
-              <li><strong>Destino:</strong> Vila da Telha (Aljezur).</li>
+              <li><strong>Lisboa:</strong> Pavilhão do Conhecimento + almoço.</li>
+              <li><strong>Carregar (AC 22 kW):</strong> Vasco da Gama. <a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Centro%20Vasco%20da%20Gama%20carregamento%20ve%C3%ADculos%20el%C3%A9tricos">Maps</a></li>
+              <li><strong>Almodôvar (HPC):</strong> top‑up 10–20 min para chegar com ≥30%. <a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=IONITY%20Almod%C3%B4var%20A2%20%C3%A1rea%20de%20servi%C3%A7o">Maps</a></li>
             </ol>
-
-            <details class="details">
-              <summary>Checklist rápida (antes de arrancar)</summary>
-              <div class="details__body">
-                <ul class="list">
-                  <li>Carro a 100% + cabo Type2 + granny 10A.</li>
-                  <li>Kit bebé rápido acessível (fralda + resguardo + muda + saco lixo).</li>
-                  <li>Snack/água + brinquedo “novo” pequeno para o de 4 anos.</li>
-                </ul>
-              </div>
-            </details>
-
             <div class="row">
-              <a class="btn btn--small" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=Porto&destination=Aljezur&waypoints=IONITY%20Leiria%20A1%20%C3%A1rea%20de%20servi%C3%A7o%20Cepsa|Pavilh%C3%A3o%20do%20Conhecimento%2C%20Lisboa|IONITY%20Almod%C3%B4var%20A2%20%C3%A1rea%20de%20servi%C3%A7o">Abrir rota (Maps)</a>
               <button class="btn btn--small btn--ghost" id="copyTripIda">Copiar roteiro da ida</button>
             </div>
           </div>
         </article>
-
-        <article class="card">
-          <div class="card__title">Volta — Sex 03/07</div>
+        <article class="card"><div class="card__title">Volta — Sex 03/07</div>
           <div class="card__body">
-            <ol class="list">
-              <li><strong>Véspera:</strong> usar tomada 10A para sair com ≥90% (ideal 100%).</li>
-              <li><strong>Almodôvar (HPC):</strong> pausa/top‑up se necessário.</li>
-              <li><strong>Lisboa (Vasco da Gama):</strong> almoço + AC 22 kW se útil.</li>
-              <li><strong>Leiria (HPC):</strong> último top‑up para chegar ao Porto com ≥30%.</li>
-            </ol>
-            <div class="row">
-              <a class="btn btn--small" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=Aljezur&destination=Porto&waypoints=IONITY%20Almod%C3%B4var%20A2%20%C3%A1rea%20de%20servi%C3%A7o|Centro%20Vasco%20da%20Gama%2C%20Lisboa|IONITY%20Leiria%20A1%20%C3%A1rea%20de%20servi%C3%A7o%20Cepsa">Abrir rota (Maps)</a>
-              <button class="btn btn--small btn--ghost" id="copyTripVolta">Copiar roteiro da volta</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card__title">Dica de carregamento eficiente</div>
-          <div class="card__body">
-            <ul class="list">
-              <li>DC é mais eficiente até ~70–80% (curva abranda acima disso).</li>
-              <li>Como queres chegar com ≥30%, o <strong>top‑up em Almodôvar</strong> dá margem ao vento/AC.</li>
-            </ul>
+            <ol class="list"><li>Véspera: carregar 10A para sair com ≥90% (ideal 100%).</li></ol>
+            <div class="row"><button class="btn btn--small btn--ghost" id="copyTripVolta">Copiar roteiro da volta</button></div>
           </div>
         </article>
       </div>
     </section>
 
-
-    <!-- MAPA OFFLINE -->
     <section class="panel" id="panel-map" data-panel="map">
-      <div class="panel__head">
-        <h1>Mapa (offline)</h1>
-        <p class="muted">Não há tiles offline (isso exigiria APIs). Aqui tens um <strong>mapa de bolso</strong>: waypoints + rotas + direções resumidas. O site fica disponível offline via cache.</p>
-      </div>
-
+      <div class="panel__head"><h1>Mapa (offline)</h1><p class="muted">Waypoints + direções resumidas (conteúdo fica em cache).</p></div>
       <div class="cards">
-        <article class="card">
-          <div class="card__title">Waypoints principais</div>
-          <div class="card__body" id="poiList"></div>
-        </article>
-
-        <article class="card">
-          <div class="card__title">Rotas rápidas</div>
-          <div class="card__body">
-            <div class="grid2">
-              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=Porto&destination=Aljezur&waypoints=IONITY%20Leiria%20A1%20%C3%A1rea%20de%20servi%C3%A7o%20Cepsa|Pavilh%C3%A3o%20do%20Conhecimento%2C%20Lisboa|IONITY%20Almod%C3%B4var%20A2%20%C3%A1rea%20de%20servi%C3%A7o">🧭 Ida (Maps)</a>
-              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=Aljezur&destination=Porto&waypoints=IONITY%20Almod%C3%B4var%20A2%20%C3%A1rea%20de%20servi%C3%A7o|Centro%20Vasco%20da%20Gama%2C%20Lisboa|IONITY%20Leiria%20A1%20%C3%A1rea%20de%20servi%C3%A7o%20Cepsa">🧭 Volta (Maps)</a>
-            </div>
-            <details class="details">
-              <summary>Direções resumidas (offline)</summary>
-              <div class="details__body" id="offlineDirections"></div>
-            </details>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card__title">Testar offline</div>
-          <div class="card__body">
-            <ol class="list">
-              <li>Abre o site 1x com internet (para o cache guardar).</li>
-              <li>Ativa modo avião e reabre — o conteúdo deve funcionar.</li>
-              <li>Links externos (Maps) vão falhar offline, mas o plano fica disponível.</li>
-            </ol>
-          </div>
-        </article>
+        <article class="card"><div class="card__title">Waypoints</div><div class="card__body" id="poiList"></div></article>
+        <article class="card"><div class="card__title">Direções resumidas</div><div class="card__body" id="offlineDirections"></div></article>
       </div>
     </section>
 
-
-    <!-- CARREGAR EM CASA -->
     <section class="panel" id="panel-home" data-panel="home">
-      <div class="panel__head">
-        <h1>Carregar em casa (Vila da Telha)</h1>
-        <p class="muted">Tens tomada 10A. Objetivo: reduzir stress e começar a volta com SOC alto.</p>
-      </div>
-
+      <div class="panel__head"><h1>Carregar em casa</h1><p class="muted">Tomada 10A + alternativa se falhar.</p></div>
       <div class="cards">
-        <article class="card">
-          <div class="card__title">Plano simples (10A)</div>
-          <div class="card__body">
-            <ul class="list">
-              <li>Regra prática: 10A ≈ <strong>2,3 kW</strong>.</li>
-              <li>Durante a semana: manter 60–90% se for útil.</li>
-              <li>Véspera da volta (02/07): subir para 90–100%.</li>
-              <li>Evita extensões baratas; confirma aquecimento da ficha após 15 min.</li>
-            </ul>
-
-            <div class="form grid2">
-              <label>Horas a carregar
-                <input type="number" id="home_hours" min="1" step="1" value="8" />
-              </label>
-              <label>Potência (kW)
-                <input type="number" id="home_kw" min="1.5" step="0.1" value="2.3" />
-              </label>
-              <label>Eficiência (%)
-                <input type="number" id="home_eff" min="70" max="100" step="1" value="90" />
-              </label>
-              <label>Bateria útil (kWh)
-                <input type="number" id="home_batt" min="30" step="0.1" value="66" />
-              </label>
-            </div>
-            <div class="row">
-              <button class="btn btn--small" id="home_calc">Calcular ganho</button>
-            </div>
-            <div class="result" id="home_out" aria-live="polite"></div>
+        <article class="card"><div class="card__title">Calculadora 10A</div><div class="card__body">
+          <div class="form grid2">
+            <label>Horas
+              <input type="number" id="home_hours" min="1" step="1" value="8" />
+            </label>
+            <label>Potência (kW)
+              <input type="number" id="home_kw" min="1.5" step="0.1" value="2.3" />
+            </label>
+            <label>Eficiência (%)
+              <input type="number" id="home_eff" min="70" max="100" step="1" value="90" />
+            </label>
+            <label>Bateria (kWh)
+              <input type="number" id="home_batt" min="30" step="0.1" value="66" />
+            </label>
           </div>
-        </article>
-
-        <article class="card">
-          <div class="card__title">Se NÃO der para carregar em casa</div>
-          <div class="card__body">
-            <ul class="list">
-              <li>Estratégia: fazer <strong>1 sessão DC</strong> na zona (ou no caminho para a A2) e depois seguir o plano.</li>
-              <li>Pesquisa rápida no Maps:</li>
-            </ul>
-            <div class="grid2">
-              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=carregador%20el%C3%A9trico%20Aljezur">🔎 Carregadores em Aljezur</a>
-              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=carregador%20el%C3%A9trico%20Vale%20da%20Telha">🔎 Carregadores Vale da Telha</a>
-              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=carregador%20el%C3%A9trico%20Lagos">🔎 Lagos (alternativa)</a>
-              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=carregador%20el%C3%A9trico%20Odemira">🔎 Odemira (alternativa)</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card__title">Mini-checklist (casa)</div>
-          <div class="card__body">
-            <ul class="list">
-              <li>Granny 10A + cabo bem encaixado.</li>
-              <li>Tomada firme; verificar aquecimento após 15 min.</li>
-              <li>Se o disjuntor cair: reduzir corrente (se possível) ou usar alternativa pública.</li>
-            </ul>
-          </div>
-        </article>
+          <div class="row"><button class="btn btn--small" id="home_calc">Calcular</button></div>
+          <div class="result" id="home_out"></div>
+        </div></article>
       </div>
     </section>
 
-
-    <!-- COMER / RESERVAS -->
     <section class="panel" id="panel-food" data-panel="food">
-      <div class="panel__head">
-        <h1>Comer / Reservas</h1>
-        <p class="muted">A ideia: 1 refeição em casa + 1 fora. Julho enche — jantar cedo (19:00–19:30) e, se possível, reservar.</p>
-      </div>
-
+      <div class="panel__head"><h1>Comer / Reservas</h1><p class="muted">Lista e templates.</p></div>
       <div class="cards">
-        <article class="card">
-          <div class="card__title">Lista rápida (editável)</div>
-          <div class="card__body" id="foodList"></div>
-          <div class="card__body">
-            <p class="muted tiny">Queres alterar/Adicionar? Edita <strong>assets/data.js</strong> → <code>food</code>.</p>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card__title">Checklist de reservas</div>
-          <div class="card__body">
-            <ul class="list">
-              <li>Escolher 2–3 sítios “backup”.</li>
-              <li>Jantar cedo (19:00–19:30).</li>
-              <li>Pedirem mesa “carrinho + bebé” (espaço).</li>
-              <li>Confirmar estacionamento/tempo a pé (evitar caminhadas longas).</li>
-            </ul>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card__title">Templates (copiar/colar)</div>
-          <div class="card__body">
-            <div class="row">
-              <button class="btn btn--small" id="food_copy_msg">Copiar mensagem de reserva</button>
-            </div>
-            <div class="result" id="food_msg_out">Mensagem pronta para WhatsApp/Telefone.</div>
-          </div>
-        </article>
+        <article class="card"><div class="card__title">Lista</div><div class="card__body" id="foodList"></div></article>
+        <article class="card"><div class="card__title">Mensagem</div><div class="card__body">
+          <div class="row"><button class="btn btn--small" id="food_copy_msg">Copiar mensagem de reserva</button></div>
+          <div class="result" id="food_msg_out"></div>
+        </div></article>
       </div>
     </section>
 
-
-    <!-- EV -->
     <section class="panel" id="panel-ev" data-panel="ev">
-      <div class="panel__head">
-        <h1>Ferramentas EV</h1>
-        <p class="muted">Guarda valores no dispositivo. Funciona offline.</p>
-      </div>
-
+      <div class="panel__head"><h1>EV</h1><p class="muted">Targets por troço + ferramentas.</p></div>
       <div class="cards">
-        <article class="card">
-          <div class="card__title">0) Targets de SOC (Ida)</div>
-          <div class="card__body">
-            <p class="muted">Introduz as distâncias reais (km) entre paragens. O cálculo usa consumo + buffer e devolve o <strong>SOC mínimo de saída</strong> para cumprir mínimos à chegada.</p>
-
-            <div class="form grid2">
-              <label>Consumo (kWh/100km)
-                <input type="number" id="t_cons" min="10" step="0.1" value="19.5" />
-              </label>
-              <label>Buffer (vento/AC) (%)
-                <input type="number" id="t_buffer" min="0" max="30" step="1" value="5" />
-              </label>
-              <label>Bateria útil (kWh)
-                <input type="number" id="t_batt" min="30" step="0.1" value="66" />
-              </label>
-              <label>Eficiência (para kWh) (%)
-                <input type="number" id="t_eff" min="70" max="100" step="1" value="92" />
-              </label>
-            </div>
-
-            <div class="cardSub">
-              <div class="cardSub__t">Troços (km) — Ida</div>
-              <div class="form grid2">
-                <label>Porto → Leiria (chegar ≥20%)
-                  <input type="number" id="t_km1" min="0" step="1" placeholder="km" />
-                </label>
-                <label>Leiria → Lisboa (chegar ≥20%)
-                  <input type="number" id="t_km2" min="0" step="1" placeholder="km" />
-                </label>
-                <label>Lisboa → Almodôvar (chegar ≥20%)
-                  <input type="number" id="t_km3" min="0" step="1" placeholder="km" />
-                </label>
-                <label>Almodôvar → Vila da Telha (chegar ≥30%)
-                  <input type="number" id="t_km4" min="0" step="1" placeholder="km" />
-                </label>
-              </div>
-              <div class="row">
-                <button class="btn btn--small" id="t_calc">Calcular targets</button>
-                <button class="btn btn--small btn--ghost" id="t_fill">Preencher com valores exemplo</button>
-              </div>
-              <div class="result" id="t_out" aria-live="polite"></div>
-              <p class="muted tiny">Nota: o resultado é conservador (inclui buffer). Para o teu estilo de margem, isto é bom.</p>
-            </div>
+        <article class="card"><div class="card__title">Targets de SOC (Ida)</div><div class="card__body">
+          <div class="form grid2">
+            <label>Consumo (kWh/100km)
+              <input type="number" id="t_cons" min="10" step="0.1" value="19.5" />
+            </label>
+            <label>Buffer (%)
+              <input type="number" id="t_buffer" min="0" max="30" step="1" value="5" />
+            </label>
+            <label>Bateria (kWh)
+              <input type="number" id="t_batt" min="30" step="0.1" value="66" />
+            </label>
+            <label>Eficiência (%)
+              <input type="number" id="t_eff" min="70" max="100" step="1" value="92" />
+            </label>
           </div>
-        </article>
-
-        <article class="card">
-          <div class="card__title">1) SOC por troço (genérico)</div>
-          <div class="card__body">
+          <div class="cardSub">
+            <div class="cardSub__t">Troços (km)</div>
             <div class="form grid2">
-              <label>Distância (km)
-                <input type="number" id="soc_distance" min="1" step="1" value="200" />
+              <label>Porto → Leiria
+                <input type="number" id="t_km1" min="0" step="1" placeholder="km" />
               </label>
-              <label>Consumo (kWh/100km)
-                <input type="number" id="soc_consumption" min="10" step="0.1" value="19.5" />
+              <label>Leiria → Lisboa
+                <input type="number" id="t_km2" min="0" step="1" placeholder="km" />
               </label>
-              <label>Bateria útil (kWh)
-                <input type="number" id="soc_battery" min="30" step="0.1" value="66" />
+              <label>Lisboa → Almodôvar
+                <input type="number" id="t_km3" min="0" step="1" placeholder="km" />
               </label>
-              <label>SOC à partida (%)
-                <input type="number" id="soc_start" min="0" max="100" step="1" value="80" />
-              </label>
-              <label>Mínimo à chegada (%)
-                <input type="number" id="soc_min_arrive" min="0" max="100" step="1" value="30" />
-              </label>
-              <label>Buffer (vento/AC) (%)
-                <input type="number" id="soc_buffer" min="0" max="30" step="1" value="5" />
+              <label>Almodôvar → Vila da Telha
+                <input type="number" id="t_km4" min="0" step="1" placeholder="km" />
               </label>
             </div>
             <div class="row">
-              <button class="btn btn--small" id="soc_calc">Calcular</button>
-              <button class="btn btn--small btn--ghost" id="soc_reset">Reset</button>
+              <button class="btn btn--small" id="t_calc">Calcular</button>
             </div>
-            <div class="result" id="soc_out" aria-live="polite"></div>
+            <div class="result" id="t_out"></div>
           </div>
-        </article>
-
-        <article class="card">
-          <div class="card__title">2) Tempo de carregamento</div>
-          <div class="card__body">
-            <div class="form grid2">
-              <label>SOC atual (%)
-                <input type="number" id="ct_from" min="0" max="100" step="1" value="20" />
-              </label>
-              <label>SOC alvo (%)
-                <input type="number" id="ct_to" min="0" max="100" step="1" value="70" />
-              </label>
-              <label>Bateria útil (kWh)
-                <input type="number" id="ct_battery" min="30" step="0.1" value="66" />
-              </label>
-              <label>Potência média (kW)
-                <input type="number" id="ct_power" min="2" step="1" value="120" />
-              </label>
-              <label>Eficiência (%)
-                <input type="number" id="ct_eff" min="70" max="100" step="1" value="92" />
-              </label>
-              <label>Overhead (min)
-                <input type="number" id="ct_overhead" min="0" step="1" value="5" />
-              </label>
-            </div>
-            <div class="row">
-              <button class="btn btn--small" id="ct_calc">Calcular</button>
-            </div>
-            <div class="result" id="ct_out" aria-live="polite"></div>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card__title">3) Planeador de pausas (bebé)</div>
-          <div class="card__body">
-            <div class="form grid2">
-              <label>Hora de saída
-                <input type="time" id="bp_depart" value="07:00" />
-              </label>
-              <label>Intervalo (h)
-                <input type="number" id="bp_interval" min="1" step="0.5" value="4" />
-              </label>
-              <label>Horas a conduzir (h)
-                <input type="number" id="bp_drive" min="1" step="0.5" value="6" />
-              </label>
-              <label>Pausa (min)
-                <input type="number" id="bp_break" min="5" step="5" value="25" />
-              </label>
-            </div>
-            <div class="row">
-              <button class="btn btn--small" id="bp_calc">Gerar</button>
-            </div>
-            <div class="result" id="bp_out" aria-live="polite"></div>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card__title">4) kWh ↔ %</div>
-          <div class="card__body">
-            <div class="form grid2">
-              <label>Bateria (kWh)
-                <input type="number" id="conv_battery" min="30" step="0.1" value="66" />
-              </label>
-              <label>Energia (kWh)
-                <input type="number" id="conv_kwh" min="0" step="0.1" value="10" />
-              </label>
-              <label>Percentagem (%)
-                <input type="number" id="conv_pct" min="0" max="100" step="0.1" value="15" />
-              </label>
-            </div>
-            <div class="row">
-              <button class="btn btn--small" id="conv_kwh_to_pct">kWh → %</button>
-              <button class="btn btn--small btn--ghost" id="conv_pct_to_kwh">% → kWh</button>
-            </div>
-            <div class="result" id="conv_out" aria-live="polite"></div>
-          </div>
-        </article>
+        </div></article>
       </div>
     </section>
 
-
-    <!-- CHECKLISTS -->
     <section class="panel" id="panel-checks" data-panel="checks">
-      <div class="panel__head">
-        <h1>Checklists</h1>
-        <p class="muted">Clicáveis, com pesquisa. Guardado no dispositivo.</p>
-      </div>
+      <div class="panel__head"><h1>Checklists</h1></div>
       <div class="toolbar">
-        <input id="checkSearch" class="search" placeholder="Pesquisar item (ex.: fraldas, cabo, protetor)…" />
-        <button class="btn btn--small btn--ghost" id="checkReset">Limpar marcas</button>
+        <input id="checkSearch" class="search" placeholder="Pesquisar item…" />
+        <button class="btn btn--small btn--ghost" id="checkReset">Limpar</button>
       </div>
       <div class="cards" id="checklistsContainer"></div>
     </section>
 
-
-    <!-- NOTAS -->
     <section class="panel" id="panel-notes" data-panel="notes">
-      <div class="panel__head">
-        <h1>Notas</h1>
-        <p class="muted">Guarda SOCs reais, consumos, restaurantes, estacionamento, etc.</p>
-      </div>
-      <div class="card">
-        <div class="card__body">
-          <textarea id="notes" class="notes" rows="12" placeholder="Ex.:
-- Ida: saí de Leiria com 68%
-- Consumo A2: 20.5 kWh/100km (vento)
-- Reservar jantar: 19:15
-"></textarea>
-          <div class="row">
-            <button class="btn btn--small" id="notesSave">Guardar</button>
-            <button class="btn btn--small btn--ghost" id="notesClear">Apagar</button>
-          </div>
-        </div>
-      </div>
+      <div class="panel__head"><h1>Notas</h1></div>
+      <div class="card"><div class="card__body">
+        <textarea id="notes" class="notes" rows="10"></textarea>
+        <div class="row"><button class="btn btn--small" id="notesSave">Guardar</button><button class="btn btn--small btn--ghost" id="notesClear">Apagar</button></div>
+      </div></div>
     </section>
 
-
-    <!-- INFO -->
     <section class="panel" id="panel-overview" data-panel="overview">
-      <div class="panel__head">
-        <h1>Info rápida</h1>
-        <p class="muted">Atalhos úteis. O site é leve e sem trackers.</p>
-      </div>
-
+      <div class="panel__head"><h1>Info</h1><p class="muted">Atalhos e como usar.</p></div>
       <div class="cards">
-        <article class="card">
-          <div class="card__title">Atalhos Maps</div>
-          <div class="card__body">
-            <div class="grid2">
-              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Pavilh%C3%A3o%20do%20Conhecimento%2C%20Lisboa">📍 Pavilhão</a>
-              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Centro%20Vasco%20da%20Gama%2C%20Lisboa">🔌 Vasco da Gama</a>
-              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=IONITY%20Leiria%20A1%20%C3%A1rea%20de%20servi%C3%A7o%20Cepsa">⚡ IONITY Leiria</a>
-              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=IONITY%20Almod%C3%B4var%20A2%20%C3%A1rea%20de%20servi%C3%A7o">⚡ IONITY Almodôvar</a>
-              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Mercado%20Municipal%20de%20Aljezur">🛒 Mercado Aljezur</a>
-              <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=R%C3%AEbat%20da%20Arrifana%20Ponta%20da%20Atalaia">🏛️ Rîbat</a>
-            </div>
+        <article class="card"><div class="card__title">Atalhos</div><div class="card__body">
+          <div class="grid2">
+            <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=IONITY%20Leiria%20A1%20%C3%A1rea%20de%20servi%C3%A7o%20Cepsa">⚡ IONITY Leiria</a>
+            <a class="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=IONITY%20Almod%C3%B4var%20A2%20%C3%A1rea%20de%20servi%C3%A7o">⚡ IONITY Almodôvar</a>
           </div>
-        </article>
-
-        <article class="card">
-          <div class="card__title">Sugestões rápidas</div>
-          <div class="card__body">
-            <ul class="list">
-              <li>Praias cedo; 12:00–15:30 = piscina/sombra.</li>
-              <li>Jantar cedo (19:00–19:30) para evitar filas e manter rotina do bebé.</li>
-              <li>Para targets de SOC: usa a tab <strong>EV</strong> → “Targets de SOC (Ida)”.</li>
-            </ul>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card__title">Como usar este site</div>
-          <div class="card__body">
-            <ol class="list">
-              <li>Antes de sair: preencher distâncias na tab <strong>EV</strong> e fixar o <strong>dia</strong>.</li>
-              <li>Durante a viagem: usar <strong>Estrada</strong>.</li>
-              <li>Em Aljezur: usar <strong>Plano do dia</strong> + <strong>Comer/Reservas</strong>.</li>
-            </ol>
-          </div>
-        </article>
+        </div></article>
       </div>
     </section>
 
-    <footer class="footer">
-      <span class="muted tiny">v3 — targets SOC + modo estrada + restaurantes/reservas.</span>
-    </footer>
-
+    <footer class="footer"><span class="muted tiny">v3.1 — fix app.js SyntaxError</span></footer>
   </main>
 
   <script src="assets/data.js"></script>
